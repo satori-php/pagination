@@ -16,11 +16,11 @@ class Paginator
     protected $perPage;
     protected $offset;
 
-    public function __construct(int $current, int $count, int $perPage = 10)
+    public function __construct(int $current, int $count, int $perPage = null)
     {
         $this->current = $current > 0 ? $current : 1;
         $this->count = $count;
-        $this->perPage = $perPage;
+        $this->perPage = $perPage ?? 10;
         $this->offset = ($this->current - 1) * $this->perPage;
         $last = (int) ceil($this->count / $this->perPage);
         $this->last = $last ? $last : 1;
@@ -93,8 +93,9 @@ class Paginator
         return $page < 1 ? 1 : $page;
     }
 
-    public function getPageList(int $buttons = 10, string $between = '...'): array
+    public function getPageList(int $buttons = null, string $between = null): array
     {
+        $buttons = $buttons ?? 5;
         $start = $this->current - (int) floor($buttons / 2);
         $start = $start > 1 ? $start : 1;
         $finish = $start + $buttons - 1;
@@ -104,7 +105,7 @@ class Paginator
             $from = $i * $this->perPage - $this->perPage + 1;
             $to = $i * $this->perPage;
             $to = $to <= $this->count ? $to : $this->count;
-            $result[] = ['page' => $i, 'range' =>  $from . $between . $to];
+            $result[] = ['page' => $i, 'range' =>  $from . ($between ?? '...') . $to];
         }
 
         return $result;
