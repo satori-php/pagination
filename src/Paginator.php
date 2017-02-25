@@ -95,7 +95,7 @@ class Paginator
 
     public function getPageList(int $buttons = null, string $between = null): array
     {
-        $buttons = $buttons ?? 5;
+        $buttons = $buttons ?? 10;
         $start = $this->current - (int) floor($buttons / 2);
         $start = $start > 1 ? $start : 1;
         $finish = $start + $buttons - 1;
