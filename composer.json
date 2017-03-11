@@ -1,7 +1,7 @@
 {
     "name": "satori/pagination",
     "description": "Pagination",
-    "keywords": ["Satori", "Pagination", "Paginator"],
+    "keywords": ["Satori", "pagination", "paginator"],
     "license": "MIT",
     "authors": [
         {
